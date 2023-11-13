@@ -218,7 +218,23 @@ class GameState:
         # https://github.com/Blizzard/s2client-proto/blob/33f0ecf615aa06ca845ffe4739ef3133f37265a9/s2clientprotocol/score.proto#L31
         self.score: ScoreDetails = ScoreDetails(self.observation.score)
         self.abilities = self.observation.abilities  # abilities of selected units
-        self.upgrades: Set[UpgradeId] = {UpgradeId(upgrade) for upgrade in self.observation_raw.player.upgrade_ids}
+        
+        self.prev = []
+
+        try:
+            # myset = Set()
+            # for upgrade in self.observation_raw.player.upgrade_ids:
+            #     myset.add(upgrade)
+
+
+            self.upgrades: Set[UpgradeId] = {UpgradeId(upgrade) for upgrade in self.observation_raw.player.upgrade_ids}
+        except:
+            # currently the way to find ids for upgrades im using is make upgrade in game then figure out what value is new in list. There has to be a better way...
+            upgradeids = [upgradeid for upgradeid in self.observation_raw.player.upgrade_ids]
+            print(set(upgradeids) - set(self.prev))
+            self.prev = upgradeids
+
+            self.upgrades: Set[UpgradeId] = set()
 
         # self.visibility[point]: 0=Hidden, 1=Fogged, 2=Visible
         self.visibility: PixelMap = PixelMap(self.observation_raw.map_state.visibility)
