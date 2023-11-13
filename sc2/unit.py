@@ -133,7 +133,25 @@ class Unit:
     def type_id(self) -> UnitTypeId:
         """ UnitTypeId found in sc2/ids/unit_typeid. """
         unit_type: int = self._proto.unit_type
-        return self.class_cache.retrieve_and_set(unit_type, lambda: UnitTypeId(unit_type))
+        
+        # If there is a unit that is not in the UnitTypeId enum then log it to SceionUnitIDs.txt and set the unit id to 84 (probe) so that 
+        # sc2-python-scion does not crash.
+        try:
+            ret = self.class_cache.retrieve_and_set(unit_type, lambda: UnitTypeId(unit_type))
+        except:
+            marker = False
+            with open("ScionUnitIDs.txt", mode='r') as f:
+                marker = str(self.name).upper() not in f.read()
+
+            # This fails to work in the case that a new unit has a name that is a substring of another new unit that has been logged.
+            if marker:
+                with open("ScionUnitIDs.txt", mode='a') as sfile:
+                    sfile.write(f"{str(self.name).upper()} = {unit_type}\n")
+
+            unit_type = 84
+            ret = self.class_cache.retrieve_and_set(unit_type, lambda: UnitTypeId(unit_type))
+
+        return ret
 
     @cached_property
     def _type_data(self) -> UnitTypeData:

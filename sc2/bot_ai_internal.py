@@ -236,9 +236,12 @@ class BotAIInternal(ABC):
                 )
             )
             # Choose best fitting point
-            result: Point2 = min(
-                possible_points, key=lambda point: sum(point.distance_to(resource_) for resource_ in resources)
-            )
+            try:
+                result: Point2 = min(
+                    possible_points, key=lambda point: sum(point.distance_to(resource_) for resource_ in resources)
+                )
+            except:
+                resulte = Point2((0, 0))
             centers[result] = resources
             # Put all expansion locations in a list
             self._expansion_positions_list.append(result)
