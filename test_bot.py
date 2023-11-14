@@ -3,12 +3,15 @@ from sc2.player import Bot, Computer
 from sc2.main import run_game
 from sc2.data import Race, Difficulty
 from sc2.bot_ai import BotAI
+from sc2.ids.unit_typeid import UnitTypeId
 
 class WorkerRushBot(BotAI):
     async def on_step(self, iteration: int):
         if iteration == 0:
             for worker in self.workers:
                 worker.attack(self.enemy_start_locations[0])
+
+            await self.client.debug_create_unit([[UnitTypeId.SPITFIRE, 5, self.game_info.map_center, 1]])
 
 run_game(maps.get("workpls"), [
     Bot(Race.Zerg, WorkerRushBot()),
