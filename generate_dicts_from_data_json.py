@@ -26,7 +26,7 @@ from sc2.ids.upgrade_id import UpgradeId
 
 
 def get_map_file_path() -> Path:
-    return Path(__file__).parent / "test" / "pickle_data" / "DeathAuraLE.xz"
+    return Path(__file__).parent / "test" / "pickle_data" / "workpls.xz"
 
 
 # Custom repr function so that the output is always the same and only changes when there were changes in the data.json tech tree file
