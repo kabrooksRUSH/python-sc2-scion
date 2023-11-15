@@ -27,7 +27,11 @@ Result = enum.Enum("Result", sc_pb.Result.items())
 Alert = enum.Enum("Alert", sc_pb.Alert.items())
 ChatChannel = enum.Enum("ChatChannel", sc_pb.ActionChat.Channel.items())
 
-Race = enum.Enum("Race", common_pb.Race.items())
+races = common_pb.Race.items()
+for _race in [('Xayid', 5), ('Genetron', 6), ('Keiron', 7)]:
+    races.append(_race)
+
+Race = enum.Enum("Race", races)
 
 DisplayType = enum.Enum("DisplayType", raw_pb.DisplayType.items())
 Alliance = enum.Enum("Alliance", raw_pb.Alliance.items())
@@ -43,6 +47,9 @@ race_worker: Dict[Race, UnitTypeId] = {
     Race.Protoss: UnitTypeId.PROBE,
     Race.Terran: UnitTypeId.SCV,
     Race.Zerg: UnitTypeId.DRONE,
+    Race.Xayid: UnitTypeId.SCAVENGER,
+    Race.Genetron: UnitTypeId.ACR,
+    Race.Keiron: UnitTypeId.CONVERTER
 }
 
 race_townhalls: Dict[Race, Set[UnitTypeId]] = {
@@ -68,7 +75,17 @@ race_townhalls: Dict[Race, Set[UnitTypeId]] = {
         UnitTypeId.HATCHERY,
         UnitTypeId.LAIR,
         UnitTypeId.HIVE,
+        # Xayid
+        UnitTypeId.SCAVENGERNEST,
+        # Genetron
+        UnitTypeId.PROCESSINGCORE,
+        # Keiron
+        UnitTypeId.CITADEL,
+        UnitTypeId.CITADELCHARGED
     },
+    Race.Xayid: {UnitTypeId.SCAVENGERNEST},
+    Race.Genetron: {UnitTypeId.PROCESSINGCORE},
+    Race.Keiron: {UnitTypeId.CITADEL, UnitTypeId.CITADELCHARGED}
 }
 
 warpgate_abilities: Dict[AbilityId, AbilityId] = {
@@ -84,4 +101,7 @@ race_gas: Dict[Race, UnitTypeId] = {
     Race.Protoss: UnitTypeId.ASSIMILATOR,
     Race.Terran: UnitTypeId.REFINERY,
     Race.Zerg: UnitTypeId.EXTRACTOR,
+    Race.Xayid: UnitTypeId.SIPHONER,
+    Race.Genetron:UnitTypeId.FILTERINGPLANT,
+    Race.Keiron: UnitTypeId.FORMULATOR
 }

@@ -551,7 +551,7 @@ class BotAIInternal(ABC):
         self.techlab_tags: Set[int] = set()
         self.reactor_tags: Set[int] = set()
 
-        worker_types: Set[UnitTypeId] = {UnitTypeId.DRONE, UnitTypeId.DRONEBURROWED, UnitTypeId.SCV, UnitTypeId.PROBE}
+        worker_types: Set[UnitTypeId] = {UnitTypeId.DRONE, UnitTypeId.DRONEBURROWED, UnitTypeId.SCV, UnitTypeId.PROBE, UnitTypeId.CONVERTER, UnitTypeId.SCAVENGER, UnitTypeId.ACR}
 
         index: int = 0
         for unit in self.state.observation_raw.units:
