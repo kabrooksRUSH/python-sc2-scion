@@ -491,6 +491,10 @@ class BotAI(BotAIInternal):
                     return Cost(25, 25)
                 if item_id == UnitTypeId.ARCHON:
                     return self.calculate_unit_value(UnitTypeId.ARCHON)
+            if item_id == UnitTypeId.PULSAR:
+                return self.calculate_unit_value(UnitTypeId.PULSAR)
+            if item_id == UnitTypeId.VOLT:
+                return self.calculate_unit_value(UnitTypeId.VOLT)
             unit_data = self.game_data.units[item_id.value]
             # Cost of morphs is automatically correctly calculated by 'calculate_ability_cost'
             return self.game_data.calculate_ability_cost(unit_data.creation_ability.exact_id)
