@@ -26,7 +26,7 @@ class KeironBot(BotAI):
             if self.supply_workers > 24 and self.supply_left < 4:
             # Always check if you can afford something before you build it
                 if self.can_afford(UnitTypeId.EDIFICE):
-                    await self.build(UnitTypeId.EDIFICE, near=citadel, step=6)
+                    await self.build(UnitTypeId.EDIFICE, near=citadel, placement_step=6)
                 return
 
             if self.supply_workers < 80 and citadel.is_idle and self.is_droning:
@@ -63,15 +63,15 @@ class KeironBot(BotAI):
                     else:
                         volt.attack(self.enemy_start_locations[0])
     
-            if self.units(UnitTypeId.CONVERTER).amount > 30 and self.units(UnitTypeId.CONVERTER).amount > 18 * self.units(UnitTypeId.CITADEL).amount and self.already_pending(UnitTypeId.CITADEL) == 0:
-                await self.expand_now()
+            # if self.units(UnitTypeId.CONVERTER).amount > 30 and self.units(UnitTypeId.CONVERTER).amount > 18 * self.units(UnitTypeId.CITADEL).amount and self.already_pending(UnitTypeId.CITADEL) == 0:
+            #     await self.expand_now()
 
 
 def main():
 
     run_game(maps.get("Keiron"), [
         Bot(Race.Random, KeironBot()),
-        Computer(Race.Random, Difficulty.Hard)
+        Computer(Race.Random, Difficulty.Medium)
     ], realtime=False)
 
 if __name__ == "__main__":
