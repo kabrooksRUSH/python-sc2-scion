@@ -20,7 +20,6 @@ class KeironBot(BotAI):
         await self.distribute_workers()
 
     async def on_step(self, iteration: int):
-            
         if self.townhalls:
             citadel = self.townhalls.random
                 
@@ -30,10 +29,10 @@ class KeironBot(BotAI):
                     await self.build(UnitTypeId.EDIFICE, near=citadel, placement_step=6)
                 return
 
-            if self.vespene > 150 and self.units(UnitTypeId.ELYSIUM).amount == 0 and self.can_afford(UnitTypeId.ELYSIUM):
+            if self.structures(UnitTypeId.ELYSIUM).amount <= 1 and self.can_afford(UnitTypeId.ELYSIUM):
                 await self.build(UnitTypeId.ELYSIUM, near=citadel, placement_step=6)
 
-            if self.supply_workers < 45 and citadel.is_idle and self.is_droning:
+            if self.supply_workers < 55 and citadel.is_idle and self.is_droning:
                 if self.can_afford(UnitTypeId.CONVERTER):
                     citadel.train(UnitTypeId.CONVERTER)
 
@@ -50,7 +49,7 @@ class KeironBot(BotAI):
             if self.supply_workers == 19 and self.already_pending(UnitTypeId.SANCTUM) == 0 and self.can_afford(UnitTypeId.SANCTUM):
                 await self.build(UnitTypeId.SANCTUM, near=citadel, placement_step=6)
 
-            if self.supply_workers == 19 and self.already_pending(UnitTypeId.FORMULATOR) == 0 and self.can_afford(UnitTypeId.FORMULATOR):
+            if (self.supply_workers == 19 or self.supply_workers == 24) and self.already_pending(UnitTypeId.FORMULATOR) == 0 and self.can_afford(UnitTypeId.FORMULATOR):
                 vgs = self.vespene_geyser.closer_than(15, citadel)
                 for vg in vgs:
                     if not self.can_afford(UnitTypeId.FORMULATOR):
@@ -72,10 +71,15 @@ class KeironBot(BotAI):
                     pos = citadel.position.to2.random_on_distance(3)
                     placement = await self.find_placement(AbilityId.KEIRONCITADELMATERIALIZE_MATERIALIZEPULSAR, pos, placement_step=1)
                     citadel.materialize(UnitTypeId.PULSAR, placement)
+
+                if self.can_afford(UnitTypeId.CRUX):
+                    pos = citadel.position.to2.random_on_distance(3)
+                    placement = await self.find_placement(AbilityId.KEIRONCITADELMATERIALIZE_MATERIALIZECRUX, pos, placement_step=1)
+                    citadel.materialize(UnitTypeId.CRUX, placement)
     
             # attack with volts and pulsar
             if self.units(UnitTypeId.VOLT).amount > 10 and self.supply_left < 2:
-                for unit in self.units(UnitTypeId.VOLT).ready.idle + self.units(UnitTypeId.PULSAR).ready.idle:
+                for unit in self.units(UnitTypeId.VOLT).ready.idle + self.units(UnitTypeId.PULSAR).ready.idle + self.units(UnitTypeId.CRUX).ready.idle:
                     targets = (self.enemy_units | self.enemy_structures).filter(lambda unit: unit.can_be_attacked)
                     if targets:
                         target = targets.closest_to(unit)
@@ -83,7 +87,7 @@ class KeironBot(BotAI):
                     else:
                         unit.attack(self.enemy_start_locations[0])
     
-            if self.units(UnitTypeId.CONVERTER).amount > 30 and self.units(UnitTypeId.CONVERTER).amount > 18 * self.units(UnitTypeId.CITADEL).amount and self.already_pending(UnitTypeId.CITADEL) == 0:
+            if self.can_afford(UnitTypeId.CITADEL) and self.units(UnitTypeId.CONVERTER).amount > 30 and self.units(UnitTypeId.CONVERTER).amount > 18 * self.structures(UnitTypeId.CITADEL).amount and self.already_pending(UnitTypeId.CITADEL) == 0:
                 await self.expand_now()
 
             if (self.structures(UnitTypeId.EDIFICE).ready and self.can_afford(AbilityId.EDIFICERESEARCH_DEVELOPMODIFIEDGAIT)
@@ -96,13 +100,20 @@ class KeironBot(BotAI):
                 edifice = self.structures(UnitTypeId.EDIFICE).ready.first
                 edifice.research(UpgradeId.LATENTCHARGE)
 
+            if not self.units(UnitTypeId.CRUX).amount == 0:
+                for crux in self.units(UnitTypeId.CRUX):
+                    if crux.energy >= 125:
+                        targets = (self.enemy_units).filter(lambda unit: unit.can_be_attacked)
+                        if targets:
+                            target = targets.closest_to(crux)
+                            crux(AbilityId.CRUXLIGHTNINGBOLT_CRUXLIGHTNINGBOLT, target)
 
 def main():
 
     run_game(maps.get("Keiron"), [
         Bot(Race.Random, KeironBot()),
-        Computer(Race.Random, Difficulty.Hard)
-    ], realtime=False)
+        Computer(Race.Terran, Difficulty.Harder)
+    ], realtime=False, save_replay_as="KeironVSHarderTerran.SC2Replay")
 
 if __name__ == "__main__":
     main()
