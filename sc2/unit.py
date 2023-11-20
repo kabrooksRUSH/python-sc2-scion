@@ -52,7 +52,7 @@ from sc2.constants import (
     UNIT_PHOTONCANNON,
     transforming,
 )
-from sc2.data import Alliance, Attribute, CloakState, Race, Target, race_gas, warpgate_abilities
+from sc2.data import Alliance, Attribute, CloakState, Race, Target, race_gas, warpgate_abilities, citadel_warp_abilities
 from sc2.ids.ability_id import AbilityId
 from sc2.ids.buff_id import BuffId
 from sc2.ids.unit_typeid import UnitTypeId
@@ -1348,7 +1348,7 @@ class Unit:
         position: Point2,
         can_afford_check: bool = False,
     ) -> Union[UnitCommand, bool]:
-        """Orders Warpgate to warp in 'unit' at 'position'.
+        """Orders Warpgate to warp in 'unit' at 'position'. Use only for protoss (not keiron).
 
         :param unit:
         :param queue:
@@ -1361,6 +1361,21 @@ class Unit:
             subtract_cost=True,
             subtract_supply=True,
             can_afford_check=can_afford_check,
+        )
+    
+    def materialize(
+            self,
+            unit: UnitTypeId,
+            position: Point2,
+            can_afford_check: bool = False
+    ) -> Union[UnitCommand, bool]:
+        """Orders Citadel to materialize in 'unit' at 'position'. Use only for Keiron units"""
+        return self(
+            citadel_warp_abilities[unit],
+            target=position,
+            subtract_cost=True,
+            subtract_supply=True,
+            can_afford_check=can_afford_check
         )
 
     def attack(self, target: Union[Unit, Point2], queue: bool = False) -> Union[UnitCommand, bool]:

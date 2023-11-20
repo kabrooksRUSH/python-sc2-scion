@@ -19,6 +19,11 @@ from sc2.constants import (
     TERRAN_STRUCTURES_REQUIRE_SCV,
     TERRAN_TECH_REQUIREMENT,
     ZERG_TECH_REQUIREMENT,
+    XAYID_STRUCTURES_REQUIRE_SCAVENGER,
+    XAYID_TECH_REQUIREMENT,
+    GENETRON_TECH_REQUIREMENT,
+    KEIRON_STRUCTURES_REQUIRE_CONVERTER,
+    KEIRON_TECH_REQUIREMENT
 )
 from sc2.data import Alert, Race, Result, Target
 from sc2.dicts.unit_research_abilities import RESEARCH_INFO
@@ -826,6 +831,9 @@ class BotAI(BotAIInternal):
             Race.Protoss: PROTOSS_TECH_REQUIREMENT,
             Race.Terran: TERRAN_TECH_REQUIREMENT,
             Race.Zerg: ZERG_TECH_REQUIREMENT,
+            Race.Xayid: XAYID_TECH_REQUIREMENT,
+            Race.Genetron: GENETRON_TECH_REQUIREMENT,
+            Race.Keiron: KEIRON_TECH_REQUIREMENT
         }
         unit_info_id = race_dict[self.race][structure_type]
         unit_info_id_value = unit_info_id.value
@@ -976,6 +984,9 @@ class BotAI(BotAIInternal):
                 Race.Protoss: PROTOSS_TECH_REQUIREMENT,
                 Race.Terran: TERRAN_TECH_REQUIREMENT,
                 Race.Zerg: ZERG_TECH_REQUIREMENT,
+                Race.Xayid: XAYID_TECH_REQUIREMENT,
+                Race.Genetron: GENETRON_TECH_REQUIREMENT,
+                Race.Keiron: KEIRON_TECH_REQUIREMENT
             }
             unit_info_id = race_dict[self.race][unit_type]
             logger.warning(
