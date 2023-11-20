@@ -226,6 +226,9 @@ class BotAI(BotAIInternal):
                 Race.Protoss: UnitTypeId.NEXUS,
                 Race.Terran: UnitTypeId.COMMANDCENTER,
                 Race.Zerg: UnitTypeId.HATCHERY,
+                Race.Xayid: UnitTypeId.SCAVENGERNEST,
+                Race.Genetron: UnitTypeId.PROCESSINGCORE,
+                Race.Keiron: UnitTypeId.CITADEL
             }
             building = start_townhall_type[self.race]
 

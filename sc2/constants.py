@@ -97,6 +97,30 @@ transforming: Dict[UnitTypeId, AbilityId] = {
     UnitTypeId.ULTRALISKBURROWED: AbilityId.BURROWDOWN_ULTRALISK,
     UnitTypeId.ZERGLING: AbilityId.BURROWUP_ZERGLING,
     UnitTypeId.ZERGLINGBURROWED: AbilityId.BURROWDOWN_ZERGLING,
+    # Xayid structures
+    # I dont think there are any
+    # Xayid units
+    UnitTypeId.MASSALISK: AbilityId.BIOMASSCAVERNRESEARCH_MUTATEHUNKER,
+    UnitTypeId.MASSALISKHUNKERED: AbilityId.HUNKER_HUNKEREDFORM,
+    #TODO: This one below is wrong, i cant find correct one for some reason
+    UnitTypeId.MENDLING: AbilityId.MENDLINGSACRIFICIALMUTATION_MUTATEINTOSACRIFICIALMUTATION,
+    # Genetron structures
+    UnitTypeId.REPULSOR: AbilityId.REPULSORUNBURROW_STATICDUNBURROW,
+    UnitTypeId.REPULSORBURROWED: AbilityId.REPULSORBURROW_STATICDBURROW,
+    UnitTypeId.INTERDICTOR: AbilityId.INTERDICTORUNBURROW_STATICDUNBURROW,
+    UnitTypeId.INTERDICTORBURROWED: AbilityId.INTERDICTORBURROW_STATICDBURROW,
+    # Genetron units
+    UnitTypeId.SCION_PROCESSOR: AbilityId.PROCESSORSTATICMODEOFF_PROCESSORCANCELSTATICMODE,
+    UnitTypeId.SCION_PROCESSORSTATIC: AbilityId.PROCESSORSTATICMODE_PROCESSORSTATICMODE,
+    UnitTypeId.MOLE: AbilityId.MOLEDEACTIVATE_MOBILIZECANNON,
+    UnitTypeId.MOLEROOTED: AbilityId.MOLEACTIVATE_DEPLOYCANNON,
+    #TODO: The mole rooted can be created by mole unburrow also and mole can be created from unroot in burrow mode, figure out how to handle this...
+    UnitTypeId.MOLEBURROWED: AbilityId.MOLEBURY_MOLECONCEAL,
+    # Keiron structures
+    UnitTypeId.CITADELCHARGED: AbilityId.CITADELCHARGEMORPH_CHARGECITADEL,
+    # Keiron units
+    UnitTypeId.ECHO: AbilityId.ECHOFIGHTERMODE_FIGHTERMODEECHO,
+    UnitTypeId.ECHODM: AbilityId.ECHODISCORDMODE_DISCORDMODE,
 }
 # For now only contains units that cost supply, used in bot_ai.do()
 abilityid_to_unittypeid: Dict[AbilityId, UnitTypeId] = {
@@ -155,6 +179,66 @@ abilityid_to_unittypeid: Dict[AbilityId, UnitTypeId] = {
     AbilityId.LARVATRAIN_VIPER: UnitTypeId.VIPER,
     AbilityId.LOCUSTTRAIN_SWARMHOST: UnitTypeId.SWARMHOSTMP,
     AbilityId.TRAINQUEEN_QUEEN: UnitTypeId.QUEEN,
+    #Xayid
+    AbilityId.BIRTHSCAVENGER_BIRTHSCAVENGER: UnitTypeId.SCAVENGER,
+    AbilityId.MUTATEXAYIDUNITS_XAYIDLING: UnitTypeId.XAYIDLING,
+    AbilityId.MUTATEXAYIDUNITS_ROAMER: UnitTypeId.ROAMER,
+    AbilityId.MUTATEXAYIDUNITS_ERODER: UnitTypeId.ERODER,
+    AbilityId.MUTATEXAYIDUNITS_SCORPALISK: UnitTypeId.SCORPALISK,
+    AbilityId.MUTATEXAYIDUNITS_MENDLING: UnitTypeId.MENDLING,
+    AbilityId.MUTATEXAYIDUNITS_CASNOLISK: UnitTypeId.CASNOLISK,
+    AbilityId.BIOMASSHATCHERYLARVAMUTATEXAYIDUNITS_REVILER: UnitTypeId.REVILER,
+    AbilityId.BIOMASSHATCHERYLARVAMUTATEXAYIDUNITS_FERRION: UnitTypeId.FERRION,
+    AbilityId.BIOMASSHATCHERYLARVAMUTATEXAYIDUNITS_MASSALISK: UnitTypeId.MASSALISK,
+    AbilityId.BIOMASSHATCHERYLARVAMUTATEXAYIDUNITS_PROWLER: UnitTypeId.PROWLER,
+    AbilityId.BIOMASSHATCHERYLARVAMUTATEXAYIDUNITS_SPITTER: UnitTypeId.SPITTER,
+    AbilityId.AERIALNESTWASPMUTATEXAYIDFLYERS_RAPTOR: UnitTypeId.RAPTOR,
+    AbilityId.AERIALNESTWASPMUTATEXAYIDFLYERS_ASSAILANT: UnitTypeId.ASSAILANT,
+    AbilityId.AERIALNESTWASPMUTATEXAYIDFLYERS_EXTERMINATOR: UnitTypeId.EXTERMINATOR,
+    AbilityId.AERIALNESTWASPMUTATEXAYIDFLYERS_XAYITHOAN: UnitTypeId.XAYITHOAN,
+    AbilityId.AERIALNESTWASPMUTATEXAYIDFLYERS_KRAKEN: UnitTypeId.KRAKEN,
+    AbilityId.PLACEACIDNEST_PLACEACIDNEST: UnitTypeId.ACIDNESTBUILD,
+    #TODO: This ^ may be wrong, check it later... It may be unittypeid.acidnest
+    #Genetron
+    AbilityId.PROCESSINGCORETRAIN_ACR: UnitTypeId.ACR,
+    AbilityId.TRAINLIGHTWEIGHTMECHS_FABRICATESPITFIRE: UnitTypeId.SPITFIRE,
+    AbilityId.TRAINLIGHTWEIGHTMECHS_FABRICATEBLITZER: UnitTypeId.BLITZER,
+    AbilityId.TRAINLIGHTWEIGHTMECHS_FABRICATEFIXER: UnitTypeId.FIXER,
+    AbilityId.TRAINLIGHTWEIGHTMECHS_FABRICATEAQUILA: UnitTypeId.AQUILA,
+    AbilityId.TRAINLIGHTWEIGHTMECHS_FABRICATEEQUALIZER: UnitTypeId.EQUALIZER,
+    AbilityId.TRAINHEAVYWEIGHTMECHS_FABRICATEINCITER: UnitTypeId.INCITER,
+    AbilityId.TRAINHEAVYWEIGHTMECHS_FABRICATEMOLE: UnitTypeId.MOLE,
+    AbilityId.TRAINHEAVYWEIGHTMECHS_FABRICATETESLA: UnitTypeId.TESLA,
+    AbilityId.TRAINHEAVYWEIGHTMECHS_FABRICATETORRENT: UnitTypeId.TORRENT,
+    AbilityId.TRAINHEAVYWEIGHTMECHS_FABRICATEVIRTUS: UnitTypeId.VIRTUS,
+    AbilityId.BUILDAIRCRAFT_FABRICATEAVENGERGENETRON: UnitTypeId.SCION_AVENGER,
+    AbilityId.BUILDAIRCRAFT_FABRICATEBADGER: UnitTypeId.BADGER,
+    AbilityId.BUILDAIRCRAFT_FABRICATEBOAR: UnitTypeId.BOAR,
+    AbilityId.BUILDAIRCRAFT_FABRICATECOURIER: UnitTypeId.COURIER,
+    AbilityId.BUILDAIRCRAFT_FABRICATEHORNET: UnitTypeId.HORNET,
+    AbilityId.BUILDAIRCRAFT_FABRICATEJUPITER: UnitTypeId.JUPITER,
+    AbilityId.LAUNCHSHOCKCHARGE_LAUNCHSHOCKCHARGE: UnitTypeId.CLOAKCHARGE,
+    AbilityId.LAUNCHCLOAKCHARGE_LAUNCHCLOAKCHARGE: UnitTypeId.CLOAKCHARGE,
+    #Keiron
+    AbilityId.KEIRONCITADELTRAIN_CONVERTER: UnitTypeId.CONVERTER,
+    AbilityId.KEIRONCITADELMATERIALIZE_MATERIALIZEPARIAH: UnitTypeId.PARIAH,
+    AbilityId.KEIRONCITADELMATERIALIZE_MATERIALIZEVOLT: UnitTypeId.VOLT,
+    AbilityId.KEIRONCITADELMATERIALIZE_MATERIALIZESUBJECTER: UnitTypeId.SUBJECTER,
+    AbilityId.KEIRONCITADELMATERIALIZE_MATERIALIZEPULSAR: UnitTypeId.PULSAR,
+    AbilityId.KEIRONCITADELMATERIALIZE_MATERIALIZECRUX: UnitTypeId.CRUX,
+    AbilityId.KEIRONCITADELMATERIALIZE_MATERIALIZEUMBRA: UnitTypeId.UMBRA,
+    AbilityId.KEIRONCITADELMATERIALIZE_MATERIALIZEWARD: UnitTypeId.WARD,
+    AbilityId.KEIRONCITADELMATERIALIZE_MATERIALIZEMYRIAD: UnitTypeId.MYRIAD,
+    AbilityId.KEIRONCITADELMATERIALIZE_MATERIALIZEINDUCER: UnitTypeId.INDUCER,
+    AbilityId.KEIRONCITADELMATERIALIZE_MATERIALIZETITAN: UnitTypeId.TITAN,
+    AbilityId.KEIRONCITADELMATERIALIZE_MATERIALIZEFUSE: UnitTypeId.FUSE,
+    AbilityId.KEIRONCITADELMATERIALIZE_MATERIALIZEECHO: UnitTypeId.ECHO,
+    AbilityId.KEIRONCITADELMATERIALIZE_MATERIALIZEAURORA: UnitTypeId.AURORA,
+    AbilityId.KEIRONCITADELMATERIALIZE_MATERIALIZEAPERTURE: UnitTypeId.APERTURE,
+    AbilityId.KEIRONCITADELMATERIALIZE_MATERIALIZEHARBINGER: UnitTypeId.HARBINGER,
+    AbilityId.KEIRONCITADELMATERIALIZE_MATERIALIZEGYRE: UnitTypeId.GYRE,
+    AbilityId.KEIRONCITADELMATERIALIZE_MATERIALIZEPARAGON: UnitTypeId.PARAGON,
+    AbilityId.KEIRONCITADELAEGISTRAIN_AEGIS: UnitTypeId.AEGIS
 }
 
 IS_STRUCTURE: int = Attribute.Structure.value
@@ -210,7 +294,42 @@ IS_CONSTRUCTING_SCV: Set[AbilityId] = {
     AbilityId.TERRANBUILD_STARPORT,
     AbilityId.TERRANBUILD_SUPPLYDEPOT,
 }
-IS_REPAIRING: Set[AbilityId] = {AbilityId.EFFECT_REPAIR, AbilityId.EFFECT_REPAIR_MULE, AbilityId.EFFECT_REPAIR_SCV}
+IS_CONSTRUCTING_SCAVENGER: Set[AbilityId] = {
+    AbilityId.FORMSTRUCTURES_SCAVENGERNEST,
+    AbilityId.FORMSTRUCTURES_SIPHONER,
+    AbilityId.FORMSTRUCTURES_FEEDINGPOOL,
+    AbilityId.FORMSTRUCTURES_XAYIDDEN,
+    AbilityId.FORMSTRUCTURES_MUTAGENCHAMBER,
+    AbilityId.FORMSTRUCTURES_BILEPIT,
+    AbilityId.FORMSTRUCTURES_CASNOLISKDEN,
+    AbilityId.FORMSTRUCTURES_BIOMASSHATCHERY,
+    AbilityId.FORMSTRUCTURES_BIOMASSCAVERN,
+    AbilityId.FORMSTRUCTURES_AVIANNEST,
+    AbilityId.FORMSTRUCTURES_CATALYSTPIT,
+    AbilityId.FORMSTRUCTURES_SUNKENWARREN,
+}
+IS_CONSTRUCTING_CONVERTER: Set[AbilityId] = {
+    AbilityId.KEIRONBUILD_CITADEL,
+    AbilityId.KEIRONBUILD_FORMULATOR,
+    AbilityId.KEIRONBUILD_EDIFICE,
+    AbilityId.KEIRONBUILD_RELIQUARY,
+    AbilityId.KEIRONBUILD_SANCTUM,
+    AbilityId.KEIRONBUILD_CONDUIT,
+    AbilityId.KEIRONBUILD_OCULUS,
+    AbilityId.KEIRONBUILD_NULLIFIER,
+    AbilityId.KEIRONBUILD_STRATUS,
+    AbilityId.KEIRONBUILD_ELYSIUM,
+    AbilityId.KEIRONBUILD_ATRIUM,
+    AbilityId.KEIRONBUILD_PANTHEON,
+    AbilityId.KEIRONBUILD_OUTLET,
+    AbilityId.KEIRONBUILD_EMPYREAN,
+    AbilityId.KEIRONBUILD_ZENITH,
+}
+IS_REPAIRING: Set[AbilityId] = {
+    AbilityId.EFFECT_REPAIR,
+    AbilityId.EFFECT_REPAIR_MULE,
+    AbilityId.EFFECT_REPAIR_SCV,
+    AbilityId.ACRREPAIR_REPAIR}
 IS_DETECTOR: Set[UnitTypeId] = {
     UnitTypeId.OBSERVER,
     UnitTypeId.OBSERVERSIEGEMODE,
@@ -219,6 +338,12 @@ IS_DETECTOR: Set[UnitTypeId] = {
     UnitTypeId.OVERSEER,
     UnitTypeId.OVERSEERSIEGEMODE,
     UnitTypeId.SPORECRAWLER,
+    UnitTypeId.BILEPIT,
+    UnitTypeId.FERRION,
+    UnitTypeId.SCION_PROCESSOR,
+    UnitTypeId.SCION_PROCESSORSTATIC,
+    UnitTypeId.OCULUS,
+    UnitTypeId.GYRE
 }
 SPEED_UPGRADE_DICT: Dict[UnitTypeId, UpgradeId] = {
     # Terran
@@ -236,6 +361,14 @@ SPEED_UPGRADE_DICT: Dict[UnitTypeId, UpgradeId] = {
     UnitTypeId.BANELING: UpgradeId.CENTRIFICALHOOKS,
     UnitTypeId.ROACH: UpgradeId.GLIALRECONSTITUTION,
     UnitTypeId.LURKERMP: UpgradeId.DIGGINGCLAWS,
+    # Xayid
+    UnitTypeId.XAYIDLING: UpgradeId.DEXTEROUSJOINTS,
+    UnitTypeId.SCORPALISK: UpgradeId.SCORPALISKMETABOLICS,
+    # Genetron
+    UnitTypeId.SPITFIRE: UpgradeId.CALIBRATEDENGINES,
+    # Keiron
+    UnitTypeId.PARIAH: UpgradeId.MODIFIEDGAIT,
+    UnitTypeId.VOLT: UpgradeId.MODIFIEDGAIT,
 }
 SPEED_INCREASE_DICT: Dict[UnitTypeId, float] = {
     # Terran
@@ -253,6 +386,14 @@ SPEED_INCREASE_DICT: Dict[UnitTypeId, float] = {
     UnitTypeId.BANELING: 1.18,
     UnitTypeId.ROACH: 1.3333333333,
     UnitTypeId.LURKERMP: 1.1,
+    # Xayid
+    UnitTypeId.XAYIDLING: .06,
+    UnitTypeId.SCORPALISK: 1.18,
+    # Genetron
+    UnitTypeId.SPITFIRE: 1.75,
+    # Keiron
+    UnitTypeId.PARIAH: 1.57,
+    UnitTypeId.VOLT: 1.22
 }
 temp1 = set(SPEED_UPGRADE_DICT)
 temp2 = set(SPEED_INCREASE_DICT)
@@ -303,10 +444,14 @@ SPEED_ALTERING_BUFFS: Dict[BuffId, float] = {
     # Inhibitor Zones reduce speed by 35%
     BuffId.INHIBITORZONETEMPORALFIELD: 0.65,
     # TODO there is a new zone coming (acceleration zone) which increase movement speed, ultralisk will be affected by this
+
+    # TODO: Fill these out later, I'm not sure if they are used for much
+    BuffId.OVERCHARGESPEEDBOOST: 1
 }
 UNIT_PHOTONCANNON: UnitTypeId = UnitTypeId.PHOTONCANNON
 UNIT_COLOSSUS: UnitTypeId = UnitTypeId.COLOSSUS
 # Used in unit_command.py and action.py to combine only certain abilities
+#TODO: Check if we need to do anything with these. (I don't know what they do right now)
 COMBINEABLE_ABILITIES: Set[AbilityId] = {
     AbilityId.MOVE,
     AbilityId.ATTACK,
@@ -328,6 +473,7 @@ COMBINEABLE_ABILITIES: Set[AbilityId] = {
     AbilityId.EFFECT_BLINK,
     AbilityId.MORPH_ARCHON,
 }
+#TODO: Check if we need to do anything with these fake effects. (I don't know what they do right now)
 FakeEffectRadii: Dict[int, float] = {
     UnitTypeId.KD8CHARGE.value: 2,
     UnitTypeId.PARASITICBOMBDUMMY.value: 3,
@@ -356,6 +502,39 @@ TERRAN_STRUCTURES_REQUIRE_SCV: Set[UnitTypeId] = {
     UnitTypeId.SUPPLYDEPOT,
 }
 
+XAYID_STRUCTURES_REQUIRE_SCAVENGER: Set[UnitTypeId] = {
+    UnitTypeId.SCAVENGERNEST,
+    UnitTypeId.SIPHONER,
+    UnitTypeId.FEEDINGPOOL,
+    UnitTypeId.XAYIDDEN,
+    UnitTypeId.MUTAGENCHAMBER,
+    UnitTypeId.BILEPIT,
+    UnitTypeId.CASNOLISK,
+    UnitTypeId.BIOMASSHATCHERY,
+    UnitTypeId.BIOMASSCAVERN,
+    UnitTypeId.AVIANNEST,
+    UnitTypeId.CATALYSTPIT,
+    UnitTypeId.SUNKENWARREN
+}
+
+KEIRON_STRUCTURES_REQUIRE_CONVERTER: Set[UnitTypeId] = {
+    UnitTypeId.CITADEL,
+    UnitTypeId.FORMULATOR,
+    UnitTypeId.EDIFICE,
+    UnitTypeId.RELIQUARY,
+    UnitTypeId.SANCTUM,
+    UnitTypeId.CONDUIT,
+    UnitTypeId.OCULUS,
+    UnitTypeId.NULLIFIER,
+    UnitTypeId.STRATUS,
+    UnitTypeId.ELYSIUM,
+    UnitTypeId.FOUNDRY,
+    UnitTypeId.ATRIUM,
+    UnitTypeId.PANTHEON,
+    UnitTypeId.OUTLET,
+    UnitTypeId.EMPYREAN,
+    UnitTypeId.ZENITH
+}
 
 def return_NOTAUNIT() -> UnitTypeId:
     # NOTAUNIT = 0
@@ -439,6 +618,82 @@ ZERG_TECH_REQUIREMENT: Dict[UnitTypeId, UnitTypeId] = defaultdict(
         UnitTypeId.BROODLORD: UnitTypeId.GREATERSPIRE,
     },
 )
+
+XAYID_TECH_REQUIREMENT: Dict[UnitTypeId, UnitTypeId] = defaultdict(
+    return_NOTAUNIT,
+    {
+        UnitTypeId.XAYIDDEN: UnitTypeId.FEEDINGPOOL,
+        UnitTypeId.MUTAGENCHAMBER: UnitTypeId.XAYIDDEN,
+        UnitTypeId.BILEPIT: UnitTypeId.XAYIDDEN,
+        UnitTypeId.CASNOLISK: UnitTypeId.MUTAGENCHAMBER,
+        UnitTypeId.BIOMASSHATCHERY: UnitTypeId.MUTAGENCHAMBER,
+        UnitTypeId.BIOMASSCAVERN: UnitTypeId.BIOMASSHATCHERY,
+        UnitTypeId.AVIANNEST: UnitTypeId.MUTAGENCHAMBER,
+        UnitTypeId.CATALYSTPIT: UnitTypeId.AVIANNEST,
+        UnitTypeId.SUNKENWARREN: UnitTypeId.CATALYSTPIT,
+        UnitTypeId.SCORPALISK: UnitTypeId.MUTAGENCHAMBER,
+        UnitTypeId.MENDLING: UnitTypeId.MUTAGENCHAMBER,
+        UnitTypeId.CASNOLISK: UnitTypeId.CASNOLISKDEN,
+        UnitTypeId.ROAMER: UnitTypeId.MUTAGENCHAMBER,
+        UnitTypeId.ERODER: UnitTypeId.CASNOLISKDEN,
+        UnitTypeId.MASSALISK: UnitTypeId.BIOMASSCAVERN,
+        UnitTypeId.EXTERMINATOR: UnitTypeId.CATALYSTPIT,
+        UnitTypeId.XAYITHOAN: UnitTypeId.CATALYSTPIT,
+        UnitTypeId.KRAKEN: UnitTypeId.SUNKENWARREN,
+    },
+)
+
+GENETRON_TECH_REQUIREMENT: Dict[UnitTypeId, UnitTypeId] = defaultdict(
+    return_NOTAUNIT,
+    {
+        UnitTypeId.NODE: UnitTypeId.PROCESSINGCORE,
+        UnitTypeId.MANUFACTURER: UnitTypeId.NODE,
+        UnitTypeId.ANALYSISTERMINAL: UnitTypeId.NODE,
+        UnitTypeId.RELAYTOWER: UnitTypeId.MANUFACTURER,
+        UnitTypeId.REPULSOR: UnitTypeId.ANALYSISTERMINAL,
+        UnitTypeId.INTERDICTOR: UnitTypeId.ANALYSISTERMINAL,
+        UnitTypeId.FABRICATOR: UnitTypeId.MANUFACTURER,
+        UnitTypeId.ASSEMBLYARRAY: UnitTypeId.RELAYTOWER,
+        UnitTypeId.GENERATOR: UnitTypeId.RELAYTOWER,
+        UnitTypeId.OLYMPUS: UnitTypeId.GENERATOR,
+        UnitTypeId.TECHVAULT: UnitTypeId.ANALYSISTERMINAL,
+        UnitTypeId.CHEMICALFIRM: UnitTypeId.TECHVAULT,
+        UnitTypeId.OUTFITTINGSTATION: UnitTypeId.ANALYSISTERMINAL,
+        UnitTypeId.ORDNANCECACHE: UnitTypeId.TECHVAULT,
+        UnitTypeId.BLITZER: UnitTypeId.ANALYSISTERMINAL,
+        UnitTypeId.FIXER: UnitTypeId.OUTFITTINGSTATION,
+        UnitTypeId.EQUALIZER: UnitTypeId.OUTFITTINGSTATION,
+        UnitTypeId.AQUILA: UnitTypeId.CHEMICALFIRM,
+        UnitTypeId.MOLE: UnitTypeId.ANALYSISTERMINAL,
+        UnitTypeId.INCITER: UnitTypeId.TECHVAULT,
+        UnitTypeId.TESLA: UnitTypeId.CHEMICALFIRM,
+        UnitTypeId.VIRTUS: UnitTypeId.CHEMICALFIRM,
+        UnitTypeId.JUPITER: UnitTypeId.ORDNANCECACHE,
+        UnitTypeId.BADGER: UnitTypeId.ORDNANCECACHE,
+    },
+)
+
+KEIRON_TECH_REQUIREMENT: Dict[UnitTypeId, UnitTypeId] = defaultdict(
+    return_NOTAUNIT,
+    {
+        UnitTypeId.EDIFICE: UnitTypeId.CITADEL,
+        UnitTypeId.RELIQUARY: UnitTypeId.CITADEL,
+        UnitTypeId.SANCTUM: UnitTypeId.EDIFICE,
+        UnitTypeId.CONDUIT: UnitTypeId.EDIFICE,
+        UnitTypeId.OCULUS: UnitTypeId.EDIFICE,
+        UnitTypeId.NULLIFIER: UnitTypeId.RELIQUARY,
+        UnitTypeId.STRATUS: UnitTypeId.RELIQUARY,
+        UnitTypeId.ELYSIUM: UnitTypeId.SANCTUM,
+        UnitTypeId.FOUNDRY: UnitTypeId.SANCTUM,
+        UnitTypeId.OUTLET: UnitTypeId.SANCTUM,
+        UnitTypeId.ATRIUM: UnitTypeId.FOUNDRY,
+        UnitTypeId.PANTHEON: UnitTypeId.ATRIUM,
+        UnitTypeId.EMPYREAN: UnitTypeId.SANCTUM,
+        UnitTypeId.ZENITH: UnitTypeId.EMPYREAN,
+        UnitTypeId.AEGIS: UnitTypeId.PANTHEON,
+        #TODO: I don't think units for keiron need to be in here except for aegis but also need to figure out how to implement 'or' requirements for tech tree
+    },
+)
 # Required in 'tech_requirement_progress' bot_ai.py function
 EQUIVALENTS_FOR_TECH_PROGRESS: Dict[UnitTypeId, Set[UnitTypeId]] = {
     # Protoss
@@ -480,6 +735,9 @@ EQUIVALENTS_FOR_TECH_PROGRESS: Dict[UnitTypeId, Set[UnitTypeId]] = {
     UnitTypeId.SWARMHOSTMP: {UnitTypeId.SWARMHOSTBURROWEDMP},
     UnitTypeId.INFESTOR: {UnitTypeId.INFESTORBURROWED},
     UnitTypeId.ULTRALISK: {UnitTypeId.ULTRALISKBURROWED},
+
+    # I think the only entry that matters here is citadel and charged citadel. The other equivalencies are leaves in the tech tree
+    UnitTypeId.CITADEL: {UnitTypeId.CITADELCHARGED},
     # TODO What about morphing untis? E.g. roach to ravager, overlord to drop-overlord or overseer
 }
 ALL_GAS: Set[UnitTypeId] = {
@@ -489,7 +747,14 @@ ALL_GAS: Set[UnitTypeId] = {
     UnitTypeId.REFINERYRICH,
     UnitTypeId.EXTRACTOR,
     UnitTypeId.EXTRACTORRICH,
+    UnitTypeId.SIPHONER,
+    UnitTypeId.SIPHONERRICH,
+    UnitTypeId.FILTERINGPLANT,
+    UnitTypeId.FILTERINGPLANTRICH,
+    UnitTypeId.FORMULATOR,
+    UnitTypeId.FORMULATORRICH
 }
+#TODO: Define upgrade bonuses for scion at some point.
 DAMAGE_BONUS_PER_UPGRADE: Dict[UnitTypeId, Dict[TargetType, Any]] = {
     #
     # Protoss
@@ -681,6 +946,7 @@ TARGET_HELPER = {
     4: "Point2 or Unit",
     5: "Point2 or no target",
 }
+#TODO: Check to see if need to do anything with this (I don't know what it does)
 CREATION_ABILITY_FIX: Dict[UnitTypeId, AbilityId] = {
     UnitTypeId.ARCHON: AbilityId.ARCHON_WARP_TARGET,
     UnitTypeId.ASSIMILATORRICH: AbilityId.PROTOSSBUILD_ASSIMILATOR,
