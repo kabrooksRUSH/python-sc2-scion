@@ -30,6 +30,9 @@ class KeironBot(BotAI):
                     await self.build(UnitTypeId.EDIFICE, near=citadel, placement_step=6)
                 return
 
+            if self.vespene > 150 and self.units(UnitTypeId.ELYSIUM).amount == 0 and self.can_afford(UnitTypeId.ELYSIUM):
+                await self.build(UnitTypeId.ELYSIUM, near=citadel, placement_step=6)
+
             if self.supply_workers < 45 and citadel.is_idle and self.is_droning:
                 if self.can_afford(UnitTypeId.CONVERTER):
                     citadel.train(UnitTypeId.CONVERTER)
@@ -87,6 +90,11 @@ class KeironBot(BotAI):
             and self.already_pending_upgrade(UpgradeId.MODIFIEDGAIT) == 0):
                 edifice = self.structures(UnitTypeId.EDIFICE).ready.first
                 edifice.research(UpgradeId.MODIFIEDGAIT)
+
+            if (self.structures(UnitTypeId.EDIFICE).ready and self.structures(UnitTypeId.ELYSIUM).ready and self.can_afford(AbilityId.EDIFICERESEARCH_DEVELOPLATENTCHARGE)
+            and self.already_pending_upgrade(UpgradeId.LATENTCHARGE) == 0):
+                edifice = self.structures(UnitTypeId.EDIFICE).ready.first
+                edifice.research(UpgradeId.LATENTCHARGE)
 
 
 def main():
