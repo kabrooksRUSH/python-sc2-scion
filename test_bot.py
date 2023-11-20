@@ -5,6 +5,7 @@ from sc2.main import run_game
 from sc2.data import Race, Difficulty
 from sc2.bot_ai import BotAI
 from sc2.ids.unit_typeid import UnitTypeId
+from sc2.ids.ability_id import AbilityId
 
 class WorkerRushBot(BotAI):
     def __init__(self):
@@ -42,6 +43,11 @@ class WorkerRushBot(BotAI):
             if self.supply_workers == 19 and self.already_pending(UnitTypeId.FORMULATOR) == 0 and self.can_afford(UnitTypeId.FORMULATOR):
                 await self.build(UnitTypeId.FORMULATOR, near=citadel)
 
+            if self.supply_workers > 24:
+                pos = citadel.position.to2.random_on_distance(3)
+                placement = await self.find_placement(AbilityId.KEIRONCITADELMATERIALIZE_MATERIALIZEVOLT, pos, placement_step=1)
+                citadel.materialize(UnitTypeId.VOLT, placement)
+
         # if iteration == 0:
         #     for worker in self.workers:
         #         worker.attack(self.enemy_start_locations[0])
@@ -52,7 +58,7 @@ class WorkerRushBot(BotAI):
 
 def main():
 
-    run_game(maps.get("workpls"), [
+    run_game(maps.get("Keiron"), [
         Bot(Race.Random, WorkerRushBot()),
         Computer(Race.Random, Difficulty.Medium)
     ], realtime=True)
