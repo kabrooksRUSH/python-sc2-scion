@@ -82,7 +82,7 @@ class XayidBot(BotAI):
                 
 def main():
     run_game(maps.get("Xayid"), [
-        Bot(Race.Random, KeironBot()),
+        Bot(Race.Random, XayidBot()),
         Computer(Race.Protoss, Difficulty.Hard)
         # Computer(Race.Terran, Difficulty.Harder)
     ], realtime=False)
