@@ -85,7 +85,9 @@ def main():
         Bot(Race.Random, XayidBot()),
         Computer(Race.Protoss, Difficulty.Hard)
         # Computer(Race.Terran, Difficulty.Harder)
-    ], realtime=False)
+    # ], realtime=False)
+    ], realtime=False, save_replay_as="XayidBotvsHardAI.SC2Replay")
+
 
 if __name__ == "__main__":
     main()
